@@ -1,9 +1,15 @@
 package main
 
-type user struct {
+import "bufio"
 
+type user struct {
+	username	string
+	userID		int
+	recv		*bufio.Reader
+	send		*bufio.Writer
 }
 
-type server struct {
 
+type server struct {
+	list *user
 }

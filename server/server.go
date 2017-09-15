@@ -3,23 +3,42 @@ package main
 import (
 	"fmt"
 	"net"
-	"bufio"
 )
 
-func server_loop(conn net.Conn) {
+func client_handling(con *net.Conn) {
+	var (
+		client user
+	)
+	if con == nil{
+		return
+	}
+	init_client(&client, con)
 	for {
-		message, _ := bufio.NewReader(conn).ReadString('\n')
-		fmt.Print(message)
+			data, err := client.recv.ReadString('\n')
+			if err != nil {
+				println(client.username+": Disconnected.")
+				return
+				}
+			print(client.username+": "+data)
 	}
 }
 
-func init_server() net.Conn {
+func server_loop(listen net.Listener) {
+	for {
+		con, err := listen.Accept()
+		if err != nil {
+			println(err)
+		}
+		go client_handling(&con)
+	}
+}
+
+func init_server() net.Listener {
 	fmt.Println("Launching Server...")
 
 	listen, err := net.Listen("tcp", ":4242")
 	if err != nil {
 		fmt.Println(err)
 	}
-	conn, _ := listen.Accept()
-	return conn
+	return listen
 }

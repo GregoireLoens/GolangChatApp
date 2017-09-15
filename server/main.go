@@ -2,6 +2,6 @@ package main
 
 
 func main() {
-	conn := init_server()
-	server_loop(conn)
+	listen := init_server()
+	server_loop(listen)
 }
