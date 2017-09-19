@@ -1,15 +1,15 @@
 package main
 
-import "bufio"
+import (
+	"bufio"
+	"net"
+)
 
 type user struct {
 	username	string
-	userID		int
+	con			net.Conn
 	recv		*bufio.Reader
-	send		*bufio.Writer
 }
 
 
-type server struct {
-	list *user
-}
+

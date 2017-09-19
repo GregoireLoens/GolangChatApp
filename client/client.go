@@ -7,7 +7,15 @@ import (
 	"fmt"
 )
 
+func read_serv(conn net.Conn){
+	for {
+		readserv, _ := bufio.NewReader(conn).ReadString('\n')
+		fmt.Print("\n"+readserv+"Text to send: ")
+	}
+}
+
 func client_loop(conn net.Conn) {
+	go read_serv(conn)
 	for {
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Text to send: ")
