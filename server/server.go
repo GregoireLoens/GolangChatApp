@@ -8,7 +8,7 @@ import (
 func server_loop(listen net.Listener) {
 	for {
 		con, _ := listen.Accept()
-		connections = append(connections, con)
+		serv.connections = append(serv.connections, con)
 		client := create_client(con)
 		go handling_client(client)
 	}

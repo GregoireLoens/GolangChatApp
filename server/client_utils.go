@@ -8,8 +8,9 @@ import (
 )
 
 func send_msg(client *user, msg string) {
-	for i := range connections {
-		fmt.Fprintf(connections[i], client.username+": "+msg)
+	for i := range serv.connections {
+		fmt.Fprintf(serv.connections[i],
+			client.username+" ("+client.curr_chan+"): "+msg)
 	}
 }
 
@@ -33,5 +34,6 @@ func create_client(con net.Conn) *user {
 	client.con = con
 	client.recv = bufio.NewReader(con)
 	client.username = "Anonymous"
+	client.curr_chan = "Global"
 	return client
 }
