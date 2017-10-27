@@ -1,8 +1,3 @@
 # GolangChatApp
 
-A chat application in Golang, just for training.
-
-TODO list
-
---> Complete user system
---> RFC 
+Just a simple chat application with tcp socket
